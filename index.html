@@ -62,9 +62,11 @@
 
     <section class="sti" id="stien" aria-label="Stationerne på stien">
       <div class="sti__start">
-        <div class="smagsproeve" id="smagsproeve" data-ids="toner,snegl,knuder,hyrde,skildpadde" aria-hidden="true"></div>
         <p class="sti__start-titel">Her starter stien</p>
         <p class="sti__start-under">46 skulpturer venter på dig</p>
+        <p class="sti__scroll">Scroll ned for at følge stien
+          <svg class="sti__scroll-pil" viewBox="0 0 24 36" aria-hidden="true"><path d="M12 3v26M3 21l9 9 9-9"/></svg>
+        </p>
       </div>
       <div class="sti__bane">
         <svg class="sti__svg" aria-hidden="true"><path class="sti__grus"/><path class="sti__spor"/><circle class="sti__gaaer" r="11"/></svg>
@@ -85,12 +87,13 @@
   </footer>
 
   <dialog class="kort" id="kort" aria-labelledby="kort-titel">
+    <div class="kort__flade" aria-hidden="true"></div>
     <div class="kort__top">
       <p class="kort__nr" id="kort-nr"></p>
       <button class="kort__luk" id="kort-luk" type="button">Luk <span aria-hidden="true">✕</span></button>
     </div>
     <div class="kort__indhold" id="kort-indhold">
-      <figure class="kort__fig"><img id="kort-img" alt=""></figure>
+      <figure class="kort__fig"><img id="kort-img" alt="" decoding="async"></figure>
       <h2 class="kort__titel" id="kort-titel"></h2>
       <p class="kort__tekst" id="kort-tekst"></p>
     </div>

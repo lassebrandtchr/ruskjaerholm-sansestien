@@ -298,7 +298,7 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/19-fiskesoeen.webp",
     "original": "billeder/original/19-fiskesoeen.jpg",
-    "bredde": 506,
+    "bredde": 507,
     "hoejde": 900,
     "visning": "miljø",
     "kilde": "album-26",

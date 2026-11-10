@@ -28,31 +28,9 @@
     liste.appendChild(li);
   });
 
-  // ---------- Smagsprøve: 5 fritlagte skulpturer ved stiens start ----------
-  var proeve = document.getElementById("smagsproeve");
-  if (proeve) {
-    // [venstre %, bredde %, z-index, rotation]
-    var pladser = [[2, 26, 2, -4], [20, 30, 3, 2], [33, 40, 5, 0], [62, 22, 4, -2], [74, 26, 2, 4]];
-    var ids = (proeve.dataset.ids || "").split(",");
-    var valgt = ids.map(function (id) { return data.filter(function (s) { return s.id === id && erFri(s); })[0]; }).filter(Boolean);
-    valgt.forEach(function (s, k) {
-      var p = pladser[k] || pladser[0];
-      var img = document.createElement("img");
-      img.src = s.billede; img.alt = "";
-      img.style.left = p[0] + "%"; img.style.width = p[1] + "%"; img.style.zIndex = p[2];
-      img.style.maxHeight = "100%"; img.style.objectFit = "contain";
-      img.style.setProperty("--rot", p[3] + "deg");
-      img.style.transitionDelay = (k * 0.12) + "s";
-      img.style.rotate = p[3] + "deg";
-      proeve.appendChild(img);
-    });
-    if (!valgt.length) proeve.remove();
-  }
-
   // Indtoning
   var stationer = liste.querySelectorAll(".station");
   var vis = [].slice.call(stationer);
-  if (proeve) vis.push(proeve);
   if ("IntersectionObserver" in window && !reduceret) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting || e.boundingClientRect.top < 0) { e.target.classList.add("er-set"); io.unobserve(e.target); } });
@@ -114,6 +92,9 @@
 
   // ---------- Stationskort ----------
   var kort = document.getElementById("kort");
+  var kFlade = kort.querySelector(".kort__flade");
+  var kTop = kort.querySelector(".kort__top");
+  var kNav = kort.querySelector(".kort__nav");
   var kNr = document.getElementById("kort-nr");
   var kFig = kort.querySelector(".kort__fig");
   var kImg = document.getElementById("kort-img");
@@ -122,7 +103,28 @@
   var kIndhold = document.getElementById("kort-indhold");
   var forrige = document.getElementById("kort-forrige");
   var naeste = document.getElementById("kort-naeste");
-  var aktiv = 0;
+  var aktiv = 0, travl = false, skjult = null, flyver = null;
+  var BLOED = "cubic-bezier(.22,1,.36,1)";
+
+  function vent(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function faerdig(a) { return a ? a.finished.catch(function () {}) : Promise.resolve(); }
+  function anim(el, kf, o) { return el.animate(kf, Object.assign({ fill: "both" }, o)); }
+  function klar(img) {
+    var p = img.decode ? img.decode().catch(function () {}) : new Promise(function (r) { if (img.complete) r(); else img.onload = img.onerror = r; });
+    return Promise.race([p, vent(900)]);
+  }
+  function stationImg(i) { var el = document.getElementById("station-" + data[i].nr); return el && el.querySelector(".station__ramme img"); }
+  // Kasse for et billede med forholdet a, lagt "contain" ind i rect r
+  function contain(r, a) {
+    var w = r.width, h = w / a;
+    if (h > r.height) { h = r.height; w = h * a; }
+    return { left: r.left + (r.width - w) / 2, top: r.top + (r.height - h) / 2, width: w, height: h };
+  }
+  function bagtaeppe(fra, til, o) {
+    try { kort.animate([{ opacity: fra }, { opacity: til }], Object.assign({ pseudoElement: "::backdrop", fill: "both" }, o)); } catch (e) {}
+  }
+  function tilTransform(r, w) { return "translate(" + r.left + "px," + r.top + "px) scale(" + (r.width / w) + ")"; }
+  function skjul(img) { if (skjult) skjult.style.opacity = ""; skjult = img; if (img) img.style.opacity = "0"; }
 
   function udfyld(i) {
     aktiv = i;
@@ -138,78 +140,85 @@
     forrige.disabled = i === 0;
     naeste.disabled = i === data.length - 1;
     kIndhold.scrollTop = 0;
-    if (data[i + 1]) { var pre = new Image(); pre.src = data[i + 1].kort || data[i + 1].original || data[i + 1].billede; }
+    [i + 1, i - 1].forEach(function (k) { if (data[k]) { var pre = new Image(); pre.src = data[k].kort || data[k].original; } });
   }
 
-  function skift(i) {
-    if (i < 0 || i >= data.length) return;
-    if (reduceret) { udfyld(i); return; }
-    kort.classList.add("skifter");
-    setTimeout(function () { udfyld(i); kort.classList.remove("skifter"); }, 180);
+  // Lav en flyvende kopi af den fritlagte skulptur (ligger inde i dialogen, over alt andet)
+  function nyFlyver(s) {
+    var f = document.createElement("img");
+    f.className = "flyver"; f.alt = ""; f.src = s.billede;
+    f.style.width = s.bredde + "px"; f.style.height = s.hoejde + "px";
+    kort.appendChild(f);
+    return f;
   }
+  function fjernFlyver() { if (flyver) { flyver.remove(); flyver = null; } }
 
-  // Årringe der breder sig ud fra punktet (x, y)
-  function aarringe(x, y) {
-    var lag = document.createElement("div");
-    lag.className = "ringe";
-    var maks = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) / 20;
-    for (var k = 0; k < 4; k++) {
-      var r = document.createElement("i");
-      r.style.left = x + "px"; r.style.top = y + "px";
-      lag.appendChild(r);
-      r.animate([
-        { transform: "scale(.2)", opacity: 0.9 },
-        { transform: "scale(" + maks + ")", opacity: 0 }
-      ], { duration: 900, delay: k * 110, easing: "cubic-bezier(.2,.7,.3,1)", fill: "both" });
-    }
-    document.body.appendChild(lag);
-    setTimeout(function () { lag.remove(); }, 1500);
-  }
-
-  // Skulpturen flyver fra stien op i kortet og bliver til fotoet
-  function flyv(fraImg) {
-    var fra = fraImg.getBoundingClientRect();
-    var til = kFig.getBoundingClientRect();
-    var fly = document.createElement("img");
-    fly.className = "flyver";
-    fly.src = fraImg.currentSrc || fraImg.src;
-    fly.style.left = fra.left + "px"; fly.style.top = fra.top + "px";
-    fly.style.width = fra.width + "px"; fly.style.height = fra.height + "px";
-    document.body.appendChild(fly);
-    var sk = Math.min(til.width / fra.width, til.height / fra.height) * 0.9;
-    var dx = til.left + til.width / 2 - (fra.left + fra.width / 2);
-    var dy = til.top + til.height / 2 - (fra.top + fra.height / 2);
-    kImg.style.opacity = 0;
-    var a = fly.animate([
-      { transform: "translate(0,0) scale(1) rotate(0deg)" },
-      { transform: "translate(" + dx * 0.55 + "px," + (dy * 0.55 - 40) + "px) scale(" + (1 + (sk - 1) * 0.6) + ") rotate(-3deg)", offset: 0.6 },
-      { transform: "translate(" + dx + "px," + dy + "px) scale(" + sk + ") rotate(0deg)" }
-    ], { duration: 650, easing: "cubic-bezier(.3,.7,.2,1)", fill: "forwards" });
-    a.onfinish = function () {
-      var klar = function () {
-        kImg.style.opacity = 1;
-        fly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 450, fill: "forwards" }).onfinish = function () { fly.remove(); };
-      };
-      if (kImg.complete && kImg.naturalWidth) klar(); else { kImg.onload = klar; setTimeout(klar, 2500); }
-    };
-  }
-
-  function aabn(i, knap) {
+  function aabn(i) {
+    if (travl) return;
+    var s = data[i], fri = erFri(s), kilde = stationImg(i);
+    var fra = kilde ? contain(kilde.getBoundingClientRect(), s.bredde / s.hoejde) : null;
     udfyld(i);
-    var img = knap && knap.querySelector("img");
-    var r = img ? img.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0, height: 0 };
-    var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     if (typeof kort.showModal === "function") kort.showModal(); else kort.setAttribute("open", "");
-    var d = kort.getBoundingClientRect(); cx -= d.left; cy -= d.top;
     document.body.style.overflow = "hidden";
     history.pushState({ kort: true }, "");
-    if (reduceret) return;
-    kort.animate([
-      { clipPath: "circle(0px at " + cx + "px " + cy + "px)" },
-      { clipPath: "circle(" + Math.hypot(innerWidth, innerHeight) + "px at " + cx + "px " + cy + "px)" }
-    ], { duration: 700, easing: "cubic-bezier(.6,0,.2,1)" });
-    aarringe(cx + d.left, cy + d.top);
-    if (img) requestAnimationFrame(function () { flyv(img); });
+    if (reduceret) { kImg.style.opacity = ""; return; }
+    travl = true;
+    var D = 620;
+    anim(kFlade, [{ opacity: 0 }, { opacity: 1 }], { duration: 420, easing: "ease-out" });
+    bagtaeppe(0, 1, { duration: 420, easing: "ease-out" });
+    anim(kTop, [{ transform: "translateY(-100%)" }, { transform: "none" }], { duration: 560, delay: 60, easing: BLOED });
+    anim(kNav, [{ transform: "translateY(100%)" }, { transform: "none" }], { duration: 560, delay: 60, easing: BLOED });
+    anim(kFig, [{ opacity: 0 }, { opacity: 1 }], { duration: 420, delay: 120, easing: "ease-out" });
+    [kTitel, kTekst].forEach(function (el, k) {
+      anim(el, [{ opacity: 0, transform: "translateY(18px)" }, { opacity: 1, transform: "none" }], { duration: 600, delay: 300 + k * 90, easing: BLOED });
+    });
+    var billedeKlar = klar(kImg);
+    if (fri && fra && fra.width) {
+      skjul(kilde);
+      kImg.style.opacity = "0";
+      var til = contain(kFig.getBoundingClientRect(), s.bredde / s.hoejde);
+      flyver = nyFlyver(s);
+      var midt = { left: (fra.left + til.left) / 2, top: Math.min(fra.top, til.top) - 24, width: (fra.width + til.width) / 2 };
+      var fly = anim(flyver, [
+        { transform: tilTransform(fra, s.bredde) },
+        { transform: tilTransform(midt, s.bredde), offset: .55 },
+        { transform: tilTransform(til, s.bredde) }
+      ], { duration: D, easing: BLOED });
+      Promise.all([faerdig(fly), billedeKlar]).then(function () {
+        var f = flyver;
+        kImg.style.opacity = "";
+        anim(kImg, [{ opacity: 0 }, { opacity: 1 }], { duration: 420, easing: "ease" });
+        if (f) faerdig(anim(f, [{ opacity: 1 }, { opacity: 0 }], { duration: 420, easing: "ease" })).then(function () { if (flyver === f) fjernFlyver(); });
+        travl = false;
+      });
+    } else {
+      kImg.style.opacity = "";
+      anim(kImg, [{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "none" }], { duration: 520, delay: 140, easing: BLOED });
+      vent(D).then(function () { travl = false; });
+    }
+  }
+
+  // Forrige/Næste: indholdet glider ud til den ene side og det nye ind fra den anden
+  function skift(i) {
+    if (i < 0 || i >= data.length || travl) return;
+    if (reduceret) { udfyld(i); skjul(stationImg(i)); return; }
+    travl = true;
+    var ret = i > aktiv ? 1 : -1;
+    var dele = [kFig, kTitel, kTekst];
+    var ud = dele.map(function (el, k) {
+      return anim(el, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateX(" + (-ret * 44) + "px)" }], { duration: 220, delay: k * 30, easing: "cubic-bezier(.4,0,1,1)" });
+    });
+    Promise.all(ud.map(faerdig)).then(function () {
+      fjernFlyver();
+      udfyld(i);
+      skjul(erFri(data[i]) ? stationImg(i) : null);
+      return klar(kImg);
+    }).then(function () {
+      dele.forEach(function (el, k) {
+        anim(el, [{ opacity: 0, transform: "translateX(" + (ret * 56) + "px)" }, { opacity: 1, transform: "none" }], { duration: 520, delay: k * 60, easing: BLOED });
+      });
+      return vent(400);
+    }).then(function () { travl = false; });
   }
 
   function erAaben() { return kort.hasAttribute("open"); }
@@ -217,30 +226,58 @@
     if (typeof kort.close === "function") kort.close();
     else { kort.removeAttribute("open"); kort.dispatchEvent(new Event("close")); }
   }
+  function nulstil() {
+    kort.getAnimations({ subtree: true }).forEach(function (a) { a.cancel(); });
+    kImg.style.opacity = "";
+    fjernFlyver();
+  }
+
   var lukker = false;
   function luk() {
     if (!erAaben() || lukker) return;
-    var el = document.getElementById("station-" + data[aktiv].nr);
+    var s = data[aktiv], el = document.getElementById("station-" + s.nr);
     if (reduceret || !el) { lukDialog(); return; }
-    lukker = true;
+    lukker = true; travl = true;
+    el.classList.add("er-set");
     el.scrollIntoView({ block: "center", behavior: "instant" });
-    var r = el.querySelector("img").getBoundingClientRect();
-    var d = kort.getBoundingClientRect();
-    var cx = r.left + r.width / 2 - d.left, cy = r.top + r.height / 2 - d.top;
-    kort.animate([
-      { clipPath: "circle(" + Math.hypot(innerWidth, innerHeight) + "px at " + cx + "px " + cy + "px)" },
-      { clipPath: "circle(0px at " + cx + "px " + cy + "px)" }
-    ], { duration: 520, easing: "cubic-bezier(.6,0,.4,1)", fill: "forwards" }).onfinish = function () { lukker = false; lukDialog(); this.cancel(); };
+    var maal = stationImg(aktiv);
+    var fri = erFri(s) && maal;
+    var D = 560;
+    var faser = [];
+    if (fri) {
+      skjul(maal);
+      var fra = contain(kFig.getBoundingClientRect(), s.bredde / s.hoejde);
+      var til = contain(maal.getBoundingClientRect(), s.bredde / s.hoejde);
+      fjernFlyver();
+      flyver = nyFlyver(s);
+      var f = flyver;
+      anim(kImg, [{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: "ease" });
+      anim(f, [{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: "ease" });
+      faser.push(faerdig(anim(f, [{ transform: tilTransform(fra, s.bredde) }, { transform: tilTransform(til, s.bredde) }], { duration: D, delay: 160, easing: BLOED })));
+    } else {
+      anim(kFig, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "scale(.96)" }], { duration: 300, easing: "ease-in" });
+    }
+    anim(kTitel, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: "ease-in" });
+    anim(kTekst, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: "ease-in" });
+    anim(kTop, [{ transform: "none" }, { transform: "translateY(-100%)" }], { duration: 380, delay: 80, easing: "cubic-bezier(.5,0,.75,0)" });
+    anim(kNav, [{ transform: "none" }, { transform: "translateY(100%)" }], { duration: 380, delay: 80, easing: "cubic-bezier(.5,0,.75,0)" });
+    if (fri) anim(kFig, [{ opacity: 1 }, { opacity: 0 }], { duration: 420, delay: 200, easing: "ease-in-out" });
+    bagtaeppe(1, 0, { duration: 420, delay: 200, easing: "ease-in-out" });
+    faser.push(faerdig(anim(kFlade, [{ opacity: 1 }, { opacity: 0 }], { duration: 420, delay: 200, easing: "ease-in-out" })));
+    Promise.all(faser).then(function () {
+      skjul(null);
+      lukDialog();
+    });
   }
 
   kort.addEventListener("close", function () {
     document.body.style.overflow = "";
+    nulstil();
+    skjul(null);
+    lukker = false; travl = false;
     if (history.state && history.state.kort) history.back();
     var el = document.getElementById("station-" + data[aktiv].nr);
-    if (el) {
-      el.scrollIntoView({ block: "center", behavior: "instant" });
-      var knap = el.querySelector("button"); if (knap) knap.focus({ preventScroll: true });
-    }
+    if (el) { var knap = el.querySelector("button"); if (knap) knap.focus({ preventScroll: true }); }
   });
   kort.addEventListener("cancel", function (e) { e.preventDefault(); luk(); });
 
@@ -248,7 +285,7 @@
 
   liste.addEventListener("click", function (e) {
     var knap = e.target.closest(".station__knap");
-    if (knap) aabn(+knap.dataset.i, knap);
+    if (knap) aabn(+knap.dataset.i);
   });
   document.getElementById("kort-luk").addEventListener("click", luk);
   forrige.addEventListener("click", function () { skift(aktiv - 1); });
