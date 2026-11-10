@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sansestien · Ruskjærholm</title>
+  <meta name="description" content="Gå Sansestien på Ruskjærholm og mød Lindy Nielsens træskulpturer – station for station.">
+  <meta property="og:title" content="Sansestien · Ruskjærholm">
+  <meta property="og:description" content="Følg stien og mød træskulpturerne af Lindy Nielsen.">
+  <meta property="og:image" content="billeder/site/portal.jpg">
+  <meta name="theme-color" content="#24372a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#stien">Gå direkte til stien</a>
+
+  <header class="hero">
+    <img class="hero__img" src="billeder/site/portal.webp" alt="Indgangsportalen til Sansestien, bygget af stablede træstammer" fetchpriority="high">
+    <div class="hero__shade"></div>
+    <div class="hero__text">
+      <p class="hero__sted">Ruskjærholm</p>
+      <h1 class="hero__titel">Sansestien</h1>
+      <p class="hero__lead">En gåtur blandt træskulpturer, skåret af Lindy Nielsen.</p>
+      <a class="knap knap--lys" href="#velkommen">Følg stien <span aria-hidden="true">↓</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" id="velkommen">
+      <h2>Velkommen til Ruskjærholm</h2>
+      <p>Portalen danner indgangsparti til et omfattende stisystem. Langs stierne er der både nye og gamle værker, som er lavet af mennesker, der kommer på Ruskjærholm i forskellige sammenhænge og perioder.</p>
+      <p class="hjaelp">Tryk på en skulptur for at se den stort og læse teksten.</p>
+
+      <div class="stier">
+        <img src="billeder/site/skilt.webp" alt="Træskilt med tre pile: 3,4 km, 2,2 km og 1,1 km" loading="lazy">
+        <div>
+          <h3>De 3 stier</h3>
+          <ul class="stier__liste">
+            <li><span class="pil pil--hvid"></span><b>1,1 km</b> den korte tur</li>
+            <li><span class="pil pil--roed"></span><b>2,2 km</b> den mellemlange tur</li>
+            <li><span class="pil pil--blaa"></span><b>3,4 km</b> hele stien</li>
+          </ul>
+          <p>Følg pilene på skiltene. Du vælger selv, hvor meget af stien du vil opleve.</p>
+        </div>
+      </div>
+
+      <div class="links">
+        <a class="knap" href="https://bit.ly/43bYoIw" target="_blank" rel="noopener">Hvad Ruskjærholm byder på</a>
+        <a class="knap" href="http://bit.ly/3PcWNga" target="_blank" rel="noopener">Hvad der foregår her</a>
+      </div>
+    </section>
+
+    <section class="kunstner" aria-labelledby="kunstner-titel">
+      <img src="billeder/site/lindy.webp" alt="Lindy Nielsen smiler i skoven" loading="lazy">
+      <div>
+        <p class="eyebrow">Kunstneren</p>
+        <h2 id="kunstner-titel">Lindy Nielsen</h2>
+        <p>En stor del af de nyere træfigurer og andre konstruktioner er lavet af Lindy Nielsen, der bor i Ikast, men også har en ejendom tæt på Ruskjær.</p>
+        <p>Han er uddannet tømrer. Måske er denne baggrund med til at give ham en særlig evne til at se træernes potentialer som figur. Lindy Nielsen mistede sin mor til kræft, da han var helt ung.</p>
+      </div>
+    </section>
+
+    <section class="sti" id="stien" aria-label="Stationerne på stien">
+      <div class="sti__start">
+        <span class="sti__start-ikon" aria-hidden="true">⛳</span>
+        <p>Her starter stien</p>
+      </div>
+      <div class="sti__bane">
+        <svg class="sti__svg" aria-hidden="true"><path class="sti__grus"/><path class="sti__spor"/><circle class="sti__gaaer" r="11"/></svg>
+        <ol class="stationer" id="stationer"></ol>
+      </div>
+      <noscript><p class="intro">Slå JavaScript til for at se stationerne.</p></noscript>
+    </section>
+
+    <section class="slut">
+      <p class="slut__titel">God tur!</p>
+      <p>Tak fordi du gik med. Kom gerne igen – skoven ser anderledes ud i hver årstid.</p>
+      <a class="knap" href="#stien">Tilbage til første station <span aria-hidden="true">↑</span></a>
+    </section>
+  </main>
+
+  <footer class="fod">
+    <p>Sansestien · Ruskjærholm · Skulpturer af Lindy Nielsen</p>
+  </footer>
+
+  <dialog class="kort" id="kort" aria-labelledby="kort-titel">
+    <div class="kort__top">
+      <p class="kort__nr" id="kort-nr"></p>
+      <button class="kort__luk" id="kort-luk" type="button">Luk <span aria-hidden="true">✕</span></button>
+    </div>
+    <div class="kort__indhold" id="kort-indhold">
+      <figure class="kort__fig"><img id="kort-img" alt=""></figure>
+      <h2 class="kort__titel" id="kort-titel"></h2>
+      <p class="kort__tekst" id="kort-tekst"></p>
+    </div>
+    <nav class="kort__nav" aria-label="Skift station">
+      <button class="knap knap--nav" id="kort-forrige" type="button"><span aria-hidden="true">←</span> Forrige</button>
+      <button class="knap knap--nav knap--frem" id="kort-naeste" type="button">Næste <span aria-hidden="true">→</span></button>
+    </nav>
+  </dialog>
+
+  <script src="data/stationer.js"></script>
+  <script src="js/sti.js"></script>
+</body>
+</html>
