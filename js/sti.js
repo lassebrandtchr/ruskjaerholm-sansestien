@@ -33,7 +33,10 @@
   var vis = [].slice.call(stationer);
   if ("IntersectionObserver" in window && !reduceret) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting || e.boundingClientRect.top < 0) { e.target.classList.add("er-set"); io.unobserve(e.target); } });
+      entries.forEach(function (e) {
+        if (e.isIntersecting || e.boundingClientRect.bottom < 0) e.target.classList.add("er-set");
+        else if (e.boundingClientRect.top > 0) e.target.classList.remove("er-set"); // kun når den forsvinder ud i bunden
+      });
     }, { rootMargin: "0px 0px -12% 0px" });
     vis.forEach(function (el) { io.observe(el); });
   } else {
