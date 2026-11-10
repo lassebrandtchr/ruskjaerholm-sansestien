@@ -7,7 +7,7 @@
   <meta name="description" content="Gå Sansestien på Ruskjærholm og mød Lindy Nielsens træskulpturer – station for station.">
   <meta property="og:title" content="Sansestien · Ruskjærholm">
   <meta property="og:description" content="Følg stien og mød træskulpturerne af Lindy Nielsen.">
-  <meta property="og:image" content="billeder/site/portal.jpg">
+  <meta property="og:image" content="https://lassebrandtchr.github.io/ruskjaerholm-sansestien/billeder/site/portal.jpg">
   <meta name="theme-color" content="#24372a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,16 +35,13 @@
       <p class="hjaelp">Tryk på en skulptur for at se den stort og læse teksten.</p>
 
       <div class="stier">
-        <img src="billeder/site/skilt.webp" alt="Træskilt med tre pile: 3,4 km, 2,2 km og 1,1 km" loading="lazy">
-        <div>
-          <h3>De 3 stier</h3>
-          <ul class="stier__liste">
-            <li><span class="pil pil--hvid"></span><b>1,1 km</b> den korte tur</li>
-            <li><span class="pil pil--roed"></span><b>2,2 km</b> den mellemlange tur</li>
-            <li><span class="pil pil--blaa"></span><b>3,4 km</b> hele stien</li>
-          </ul>
-          <p>Følg pilene på skiltene. Du vælger selv, hvor meget af stien du vil opleve.</p>
-        </div>
+        <h3>De 3 stier</h3>
+        <p>Følg pilene på skiltene. Du vælger selv, hvor meget af stien du vil opleve.</p>
+        <ul class="stier__liste">
+          <li class="pil pil--hvid"><svg viewBox="0 0 220 64" aria-hidden="true"><path d="M4 32 44 4v14h170v28H44v14z"/></svg><span><b>1,1 km</b> den korte tur</span></li>
+          <li class="pil pil--roed"><svg viewBox="0 0 220 64" aria-hidden="true"><path d="M4 32 44 4v14h170v28H44v14z"/></svg><span><b>2,2 km</b> den mellemlange tur</span></li>
+          <li class="pil pil--blaa"><svg viewBox="0 0 220 64" aria-hidden="true"><path d="M4 32 44 4v14h170v28H44v14z"/></svg><span><b>3,4 km</b> hele stien</span></li>
+        </ul>
       </div>
 
       <div class="links">
@@ -65,8 +62,9 @@
 
     <section class="sti" id="stien" aria-label="Stationerne på stien">
       <div class="sti__start">
-        <span class="sti__start-ikon" aria-hidden="true">⛳</span>
-        <p>Her starter stien</p>
+        <div class="smagsproeve" id="smagsproeve" data-ids="toner,snegl,knuder,hyrde,skildpadde" aria-hidden="true"></div>
+        <p class="sti__start-titel">Her starter stien</p>
+        <p class="sti__start-under">46 skulpturer venter på dig</p>
       </div>
       <div class="sti__bane">
         <svg class="sti__svg" aria-hidden="true"><path class="sti__grus"/><path class="sti__spor"/><circle class="sti__gaaer" r="11"/></svg>

@@ -10,10 +10,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/01-snegl.webp",
     "original": "billeder/original/01-snegl.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-46"
+    "bredde": 795,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-46",
+    "intro": "billeder/intro/01-snegl.webp",
+    "kort": "billeder/kort/01-snegl.webp"
   },
   {
     "nr": 2,
@@ -24,10 +26,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/02-snor.webp",
     "original": "billeder/original/02-snor.jpg",
-    "bredde": 410,
-    "hoejde": 408,
-    "visning": "miljø",
-    "kilde": "notion-03.png"
+    "bredde": 800,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "notion-03.png",
+    "intro": "billeder/intro/02-snor.webp",
+    "kort": "billeder/kort/02-snor.webp"
   },
   {
     "nr": 3,
@@ -38,10 +42,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/03-knuder.webp",
     "original": "billeder/original/03-knuder.jpg",
-    "bredde": 900,
-    "hoejde": 647,
-    "visning": "miljø",
-    "kilde": "album-03"
+    "bredde": 1000,
+    "hoejde": 819,
+    "visning": "fritlagt-klar",
+    "kilde": "album-03",
+    "intro": "billeder/intro/03-knuder.webp",
+    "kort": "billeder/kort/03-knuder.webp"
   },
   {
     "nr": 4,
@@ -52,10 +58,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/04-stor-kaede.webp",
     "original": "billeder/original/04-stor-kaede.jpg",
-    "bredde": 834,
-    "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-02"
+    "bredde": 795,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-02",
+    "intro": "billeder/intro/04-stor-kaede.webp",
+    "kort": "billeder/kort/04-stor-kaede.webp"
   },
   {
     "nr": 5,
@@ -66,10 +74,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/05-lille-kaede.webp",
     "original": "billeder/original/05-lille-kaede.jpg",
-    "bredde": 410,
-    "hoejde": 404,
-    "visning": "miljø",
-    "kilde": "notion-04.png"
+    "bredde": 1000,
+    "hoejde": 729,
+    "visning": "fritlagt-klar",
+    "kilde": "notion-04.png",
+    "kort": "billeder/kort/05-lille-kaede.webp",
+    "intro": "billeder/intro/05-lille-kaede.webp"
   },
   {
     "nr": 6,
@@ -80,10 +90,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/06-blomst.webp",
     "original": "billeder/original/06-blomst.jpg",
-    "bredde": 759,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-04"
+    "bredde": 800,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-04",
+    "intro": "billeder/intro/06-blomst.webp",
+    "kort": "billeder/kort/06-blomst.webp"
   },
   {
     "nr": 7,
@@ -94,10 +106,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/07-skildpadde.webp",
     "original": "billeder/original/07-skildpadde.jpg",
-    "bredde": 900,
-    "hoejde": 722,
-    "visning": "fritlagt",
-    "kilde": "album-24"
+    "bredde": 1000,
+    "hoejde": 879,
+    "visning": "fritlagt-klar",
+    "kilde": "album-24",
+    "intro": "billeder/intro/07-skildpadde.webp",
+    "kort": "billeder/kort/07-skildpadde.webp"
   },
   {
     "nr": 8,
@@ -108,10 +122,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/08-peger.webp",
     "original": "billeder/original/08-peger.jpg",
-    "bredde": 900,
-    "hoejde": 812,
-    "visning": "miljø",
-    "kilde": "album-05"
+    "bredde": 1000,
+    "hoejde": 426,
+    "visning": "fritlagt-klar",
+    "kilde": "album-05",
+    "intro": "billeder/intro/08-peger.webp",
+    "kort": "billeder/kort/08-peger.webp"
   },
   {
     "nr": 9,
@@ -122,10 +138,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/09-haj.webp",
     "original": "billeder/original/09-haj.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-43"
+    "bredde": 577,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-43",
+    "intro": "billeder/intro/09-haj.webp",
+    "kort": "billeder/kort/09-haj.webp"
   },
   {
     "nr": 10,
@@ -136,10 +154,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/10-ben.webp",
     "original": "billeder/original/10-ben.jpg",
-    "bredde": 570,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-09"
+    "bredde": 553,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-09",
+    "intro": "billeder/intro/10-ben.webp",
+    "kort": "billeder/kort/10-ben.webp"
   },
   {
     "nr": 11,
@@ -150,10 +170,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/11-hjerte.webp",
     "original": "billeder/original/11-hjerte.jpg",
-    "bredde": 776,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-08"
+    "bredde": 641,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-08",
+    "intro": "billeder/intro/11-hjerte.webp",
+    "kort": "billeder/kort/11-hjerte.webp"
   },
   {
     "nr": 12,
@@ -164,10 +186,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/12-sav.webp",
     "original": "billeder/original/12-sav.jpg",
-    "bredde": 615,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-11"
+    "bredde": 787,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-11",
+    "intro": "billeder/intro/12-sav.webp",
+    "kort": "billeder/kort/12-sav.webp"
   },
   {
     "nr": 13,
@@ -178,10 +202,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/13-oekse.webp",
     "original": "billeder/original/13-oekse.jpg",
-    "bredde": 564,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-06"
+    "bredde": 427,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-06",
+    "intro": "billeder/intro/13-oekse.webp",
+    "kort": "billeder/kort/13-oekse.webp"
   },
   {
     "nr": 14,
@@ -192,10 +218,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/14-fuglehus.webp",
     "original": "billeder/original/14-fuglehus.jpg",
-    "bredde": 598,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-12"
+    "bredde": 508,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-12",
+    "intro": "billeder/intro/14-fuglehus.webp",
+    "kort": "billeder/kort/14-fuglehus.webp"
   },
   {
     "nr": 15,
@@ -206,10 +234,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/15-grankogle.webp",
     "original": "billeder/original/15-grankogle.jpg",
-    "bredde": 641,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-10"
+    "bredde": 350,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-10",
+    "intro": "billeder/intro/15-grankogle.webp",
+    "kort": "billeder/kort/15-grankogle.webp"
   },
   {
     "nr": 16,
@@ -220,10 +250,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/16-aebleskrog.webp",
     "original": "billeder/original/16-aebleskrog.jpg",
-    "bredde": 573,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-13"
+    "bredde": 554,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-13",
+    "intro": "billeder/intro/16-aebleskrog.webp",
+    "kort": "billeder/kort/16-aebleskrog.webp"
   },
   {
     "nr": 17,
@@ -234,10 +266,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/17-stol-i-trae.webp",
     "original": "billeder/original/17-stol-i-trae.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-25"
+    "bredde": 504,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-25",
+    "intro": "billeder/intro/17-stol-i-trae.webp",
+    "kort": "billeder/kort/17-stol-i-trae.webp"
   },
   {
     "nr": 18,
@@ -250,8 +284,10 @@ window.STATIONER = [
     "original": "billeder/original/18-hjerter.jpg",
     "bredde": 506,
     "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-33"
+    "visning": "fritlagt",
+    "kilde": "album-33",
+    "intro": "billeder/intro/18-hjerter.webp",
+    "kort": "billeder/kort/18-hjerter.webp"
   },
   {
     "nr": 19,
@@ -265,7 +301,8 @@ window.STATIONER = [
     "bredde": 506,
     "hoejde": 900,
     "visning": "miljø",
-    "kilde": "album-26"
+    "kilde": "album-26",
+    "kort": "billeder/kort/19-fiskesoeen.webp"
   },
   {
     "nr": 20,
@@ -276,10 +313,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/20-lademann.webp",
     "original": "billeder/original/20-lademann.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-34"
+    "bredde": 734,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-34",
+    "intro": "billeder/intro/20-lademann.webp",
+    "kort": "billeder/kort/20-lademann.webp"
   },
   {
     "nr": 21,
@@ -290,10 +329,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/21-stormfald.webp",
     "original": "billeder/original/21-stormfald.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-35"
+    "bredde": 1000,
+    "hoejde": 895,
+    "visning": "fritlagt-klar",
+    "kilde": "album-35",
+    "intro": "billeder/intro/21-stormfald.webp",
+    "kort": "billeder/kort/21-stormfald.webp"
   },
   {
     "nr": 22,
@@ -304,10 +345,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/22-kaffemaskine.webp",
     "original": "billeder/original/22-kaffemaskine.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-40"
+    "bredde": 664,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-40",
+    "intro": "billeder/intro/22-kaffemaskine.webp",
+    "kort": "billeder/kort/22-kaffemaskine.webp"
   },
   {
     "nr": 23,
@@ -318,10 +361,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/23-kaffevogn.webp",
     "original": "billeder/original/23-kaffevogn.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-27"
+    "bredde": 819,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-27",
+    "intro": "billeder/intro/23-kaffevogn.webp",
+    "kort": "billeder/kort/23-kaffevogn.webp"
   },
   {
     "nr": 24,
@@ -332,10 +377,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/24-ansigter.webp",
     "original": "billeder/original/24-ansigter.jpg",
-    "bredde": 694,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-42"
+    "bredde": 800,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-42",
+    "intro": "billeder/intro/24-ansigter.webp",
+    "kort": "billeder/kort/24-ansigter.webp"
   },
   {
     "nr": 25,
@@ -346,10 +393,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/25-kasket.webp",
     "original": "billeder/original/25-kasket.jpg",
-    "bredde": 410,
-    "hoejde": 404,
-    "visning": "fritlagt",
-    "kilde": "notion-10.png"
+    "bredde": 397,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "notion-10.png",
+    "intro": "billeder/intro/25-kasket.webp",
+    "kort": "billeder/kort/25-kasket.webp"
   },
   {
     "nr": 26,
@@ -363,7 +412,8 @@ window.STATIONER = [
     "bredde": 506,
     "hoejde": 900,
     "visning": "fritlagt",
-    "kilde": "album-36"
+    "kilde": "album-36",
+    "kort": "billeder/kort/26-smil.webp"
   },
   {
     "nr": 27,
@@ -374,10 +424,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/27-vandhane.webp",
     "original": "billeder/original/27-vandhane.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-37"
+    "bredde": 536,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-37",
+    "intro": "billeder/intro/27-vandhane.webp",
+    "kort": "billeder/kort/27-vandhane.webp"
   },
   {
     "nr": 28,
@@ -388,10 +440,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/28-hyrde.webp",
     "original": "billeder/original/28-hyrde.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-47"
+    "bredde": 524,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-47",
+    "intro": "billeder/intro/28-hyrde.webp",
+    "kort": "billeder/kort/28-hyrde.webp"
   },
   {
     "nr": 29,
@@ -402,10 +456,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/29-greb.webp",
     "original": "billeder/original/29-greb.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-32"
+    "bredde": 256,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-32",
+    "intro": "billeder/intro/29-greb.webp",
+    "kort": "billeder/kort/29-greb.webp"
   },
   {
     "nr": 30,
@@ -416,10 +472,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/30-rendegraver.webp",
     "original": "billeder/original/30-rendegraver.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-31"
+    "bredde": 782,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-31",
+    "intro": "billeder/intro/30-rendegraver.webp",
+    "kort": "billeder/kort/30-rendegraver.webp"
   },
   {
     "nr": 31,
@@ -430,10 +488,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/31-hammer.webp",
     "original": "billeder/original/31-hammer.jpg",
-    "bredde": 900,
-    "hoejde": 506,
-    "visning": "miljø",
-    "kilde": "album-49"
+    "bredde": 1000,
+    "hoejde": 800,
+    "visning": "fritlagt-klar",
+    "kilde": "album-49",
+    "intro": "billeder/intro/31-hammer.webp",
+    "kort": "billeder/kort/31-hammer.webp"
   },
   {
     "nr": 32,
@@ -444,10 +504,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/32-hjaelp.webp",
     "original": "billeder/original/32-hjaelp.jpg",
-    "bredde": 331,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-29"
+    "bredde": 367,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-29",
+    "intro": "billeder/intro/32-hjaelp.webp",
+    "kort": "billeder/kort/32-hjaelp.webp"
   },
   {
     "nr": 33,
@@ -458,10 +520,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/33-baby.webp",
     "original": "billeder/original/33-baby.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "miljø",
-    "kilde": "album-39"
+    "bredde": 514,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-39",
+    "intro": "billeder/intro/33-baby.webp",
+    "kort": "billeder/kort/33-baby.webp"
   },
   {
     "nr": 34,
@@ -472,10 +536,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/34-cowboy.webp",
     "original": "billeder/original/34-cowboy.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-30"
+    "bredde": 499,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-30",
+    "intro": "billeder/intro/34-cowboy.webp",
+    "kort": "billeder/kort/34-cowboy.webp"
   },
   {
     "nr": 35,
@@ -486,10 +552,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/35-kilde.webp",
     "original": "billeder/original/35-kilde.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-38"
+    "bredde": 454,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-38",
+    "intro": "billeder/intro/35-kilde.webp",
+    "kort": "billeder/kort/35-kilde.webp"
   },
   {
     "nr": 36,
@@ -500,10 +568,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/36-livets-trae.webp",
     "original": "billeder/original/36-livets-trae.jpg",
-    "bredde": 487,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-07"
+    "bredde": 297,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-07",
+    "intro": "billeder/intro/36-livets-trae.webp",
+    "kort": "billeder/kort/36-livets-trae.webp"
   },
   {
     "nr": 37,
@@ -514,10 +584,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/37-godt-gaaet.webp",
     "original": "billeder/original/37-godt-gaaet.jpg",
-    "bredde": 523,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-17"
+    "bredde": 402,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-17",
+    "intro": "billeder/intro/37-godt-gaaet.webp",
+    "kort": "billeder/kort/37-godt-gaaet.webp"
   },
   {
     "nr": 38,
@@ -528,10 +600,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/38-spindelvaev.webp",
     "original": "billeder/original/38-spindelvaev.jpg",
-    "bredde": 900,
-    "hoejde": 828,
-    "visning": "fritlagt",
-    "kilde": "album-18"
+    "bredde": 814,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-18",
+    "kort": "billeder/kort/38-spindelvaev.webp",
+    "intro": "billeder/intro/38-spindelvaev.webp"
   },
   {
     "nr": 39,
@@ -542,10 +616,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/39-evighed.webp",
     "original": "billeder/original/39-evighed.jpg",
-    "bredde": 615,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-20"
+    "bredde": 841,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-20",
+    "kort": "billeder/kort/39-evighed.webp",
+    "intro": "billeder/intro/39-evighed.webp"
   },
   {
     "nr": 40,
@@ -556,10 +632,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/40-stjerne.webp",
     "original": "billeder/original/40-stjerne.jpg",
-    "bredde": 606,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-19"
+    "bredde": 927,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-19",
+    "kort": "billeder/kort/40-stjerne.webp",
+    "intro": "billeder/intro/40-stjerne.webp"
   },
   {
     "nr": 41,
@@ -570,10 +648,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/41-kryds-bolle.webp",
     "original": "billeder/original/41-kryds-bolle.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-23"
+    "bredde": 809,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-23",
+    "kort": "billeder/kort/41-kryds-bolle.webp",
+    "intro": "billeder/intro/41-kryds-bolle.webp"
   },
   {
     "nr": 42,
@@ -584,10 +664,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/42-pendul.webp",
     "original": "billeder/original/42-pendul.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-48"
+    "bredde": 347,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-48",
+    "kort": "billeder/kort/42-pendul.webp",
+    "intro": "billeder/intro/42-pendul.webp"
   },
   {
     "nr": 43,
@@ -598,10 +680,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/43-fugle.webp",
     "original": "billeder/original/43-fugle.jpg",
-    "bredde": 506,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-44"
+    "bredde": 539,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-44",
+    "kort": "billeder/kort/43-fugle.webp",
+    "intro": "billeder/intro/43-fugle.webp"
   },
   {
     "nr": 44,
@@ -612,10 +696,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/44-toner.webp",
     "original": "billeder/original/44-toner.jpg",
-    "bredde": 502,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-45"
+    "bredde": 509,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-45",
+    "kort": "billeder/kort/44-toner.webp",
+    "intro": "billeder/intro/44-toner.webp"
   },
   {
     "nr": 45,
@@ -626,10 +712,12 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/45-paddehat.webp",
     "original": "billeder/original/45-paddehat.jpg",
-    "bredde": 575,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-21"
+    "bredde": 578,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-21",
+    "kort": "billeder/kort/45-paddehat.webp",
+    "intro": "billeder/intro/45-paddehat.webp"
   },
   {
     "nr": 46,
@@ -640,9 +728,11 @@ window.STATIONER = [
     "sti": null,
     "billede": "billeder/stationer/46-stol.webp",
     "original": "billeder/original/46-stol.jpg",
-    "bredde": 635,
-    "hoejde": 900,
-    "visning": "fritlagt",
-    "kilde": "album-22"
+    "bredde": 677,
+    "hoejde": 1000,
+    "visning": "fritlagt-klar",
+    "kilde": "album-22",
+    "kort": "billeder/kort/46-stol.webp",
+    "intro": "billeder/intro/46-stol.webp"
   }
 ];
