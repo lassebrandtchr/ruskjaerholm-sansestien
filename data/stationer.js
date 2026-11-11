@@ -63,7 +63,8 @@ window.STATIONER = [
     "visning": "fritlagt-klar",
     "kilde": "album-02",
     "intro": "billeder/intro/04-stor-kaede.webp",
-    "kort": "billeder/kort/04-stor-kaede.webp"
+    "kort": "billeder/kort/04-stor-kaede.webp",
+    "kant": "hoejre"
   },
   {
     "nr": 5,

@@ -16,7 +16,7 @@
   // ---------- Stationer ----------
   data.forEach(function (s, i) {
     var li = document.createElement("li");
-    li.className = "station" + (erFri(s) ? " station--fri" : "") + (erBred(s) ? " station--bred" : "");
+    li.className = "station" + (erFri(s) ? " station--fri" : "") + (erBred(s) ? " station--bred" : "") + (s.kant ? " station--kant-" + s.kant : "");
     li.id = "station-" + s.nr;
     li.innerHTML =
       '<button class="station__knap" type="button" data-i="' + i + '">' +

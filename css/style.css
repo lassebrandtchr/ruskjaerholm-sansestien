@@ -18,7 +18,9 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; overflow-x: hidden; }
+/* Intet må gøre siden bredere end skærmen (ellers zoomer telefonen ud og kortet skæres af) */
+body { overflow-x: clip; }
 body {
   margin: 0;
   background: var(--birk);
@@ -228,3 +230,13 @@ a { color: var(--mos-2); }
   .hero__img, .hero__shade, .hero__text > * { animation: none; }
 }
 .kort[open] { position: fixed; inset: 0; z-index: 1000; }
+@media (max-width: 1099px) { .kort[open] { width: 100vw; width: 100dvw; height: 100dvh; } }
+
+/* Skulpturer hvor billedet er skåret lige af i én side: kanten lægges helt ud mod skærmkanten */
+.station--kant-hoejre { padding-right: 0; }
+.station--kant-hoejre .station__ramme img { margin-right: 0; }
+@media (min-width: 760px) {
+  .station--kant-hoejre { padding-right: 60px; }
+  .station--kant-hoejre .station__ramme img { -webkit-mask-image: linear-gradient(to left, transparent, #000 22%); mask-image: linear-gradient(to left, transparent, #000 22%); }
+}
+@media (min-width: 1100px) { .station--kant-hoejre { padding-right: 90px; } }
