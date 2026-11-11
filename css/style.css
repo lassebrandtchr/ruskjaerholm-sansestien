@@ -208,8 +208,6 @@ a { color: var(--mos-2); }
   .station__ramme img { transition: none; }
 }
 
-/* Skulpturen der flyver mellem stien og kortet */
-.flyver { position: fixed; left: 0; top: 0; z-index: 5; pointer-events: none; transform-origin: 0 0; will-change: transform, opacity; filter: drop-shadow(0 22px 18px rgba(36,55,42,.35)); }
 .kort__fig { position: relative; overflow: hidden; }
 
 /* Åbning: siden fader roligt ind */
