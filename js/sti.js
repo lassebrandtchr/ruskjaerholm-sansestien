@@ -22,7 +22,7 @@
     li.id = "station-" + s.nr;
     li.innerHTML =
       '<button class="station__knap" type="button" data-i="' + i + '">' +
-        '<span class="station__ramme"><img src="' + s.billede + '" alt="' + esc(s.titel) + '" loading="lazy" width="' + (s.bredde || 800) + '" height="' + (s.hoejde || 1000) + '"></span>' +
+        '<span class="station__ramme"><img src="' + s.billede + '" alt="' + esc(s.titel) + '" loading="' + (i < 2 ? "eager" : "lazy") + '" decoding="async" width="' + (s.bredde || 800) + '" height="' + (s.hoejde || 1000) + '" style="--r:' + ((s.bredde || 800) / (s.hoejde || 1000)).toFixed(4) + '"></span>' +
         '<span class="station__pael" aria-hidden="true">' + s.nr + '</span>' +
         '<span class="station__titel"><span class="sr">Station ' + s.nr + ': </span>' + esc(s.titel) + '</span>' +
         '<span class="station__se">Se og læs <span aria-hidden="true">→</span></span>' +

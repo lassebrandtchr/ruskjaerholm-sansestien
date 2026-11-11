@@ -134,7 +134,7 @@ a { color: var(--mos-2); }
 
 /* Fritlagte skulpturer (sættes når billedet er frilagt) */
 .station--fri .station__ramme { background: none; border: 0; box-shadow: none; overflow: visible; }
-.station--fri .station__ramme img { aspect-ratio: auto; object-fit: contain; max-height: 420px; width: auto; max-width: 100%; margin: 0 auto; filter: drop-shadow(0 22px 18px rgba(36,55,42,.35)); }
+.station--fri .station__ramme img { --mh: 420px; aspect-ratio: var(--r, 0.8); height: auto; object-fit: contain; width: min(100%, calc(var(--mh) * var(--r, 0.8))); max-width: 100%; margin: 0 auto; filter: drop-shadow(0 22px 18px rgba(36,55,42,.35)); }
 @media (hover: hover) { .station--fri .station__knap:hover .station__ramme img { transform: scale(1.04) rotate(-1deg); } }
 .station--bred { justify-content: center; }
 .station--bred .station__knap { width: min(96%, 520px); }
@@ -200,7 +200,7 @@ a { color: var(--mos-2); }
 @media (min-width: 1100px) {
   .sti__bane { max-width: 980px; }
   .station__knap { width: 380px; }
-  .station--fri .station__ramme img { max-height: 480px; }
+  .station--fri .station__ramme img { --mh: 480px; }
   .station { padding: 48px 90px; }
   .kort { max-width: 760px; height: min(94vh, 980px); margin: auto; border-radius: var(--radius); overflow: hidden; }
 }
@@ -251,4 +251,16 @@ a { color: var(--mos-2); }
   .kort__tekst { font-size: 1.15rem; padding: 0 12px; }
   .kort__nav { padding-top: 8px; padding-bottom: max(8px, env(safe-area-inset-bottom)); }
   .knap--nav { min-height: 48px; }
+}
+
+/* Kortets billede svæver: afrundede hjørner hele vejen rundt og luft ud til siderne */
+.kort__fig { background: none; }
+.kort__fig img {
+  position: absolute; inset: 14px 16px 6px; margin: auto;
+  width: auto; height: auto; max-width: calc(100% - 32px); max-height: calc(100% - 20px);
+  object-fit: contain; border-radius: 20px; background: var(--birk-2);
+  box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 22px 40px -18px rgba(36,55,42,.6);
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .kort__fig img { inset: 10px 4px 10px max(12px, env(safe-area-inset-left)); max-width: calc(100% - 16px - env(safe-area-inset-left)); }
 }
