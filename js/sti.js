@@ -70,7 +70,33 @@
     spor.setAttribute("d", d);
     laengde = grus.getTotalLength();
     grus.style.strokeDasharray = laengde;
+    // Opslagstabel: længde -> y, så prikken kan følge skærmhøjden og ikke stiens længde
+    tabelY = [];
+    tabelL = [];
+    var trin = Math.max(1, Math.ceil(laengde / 6));
+    for (var k = 0; k <= trin; k++) {
+      var l = laengde * k / trin;
+      tabelL.push(l);
+      tabelY.push(grus.getPointAtLength(l).y);
+    }
     opdater();
+  }
+  var tabelY = [], tabelL = [];
+
+  // Find stedet på stien hvor y = maal (stien går altid nedad, så y er stigende)
+  function laengdeVedY(y) {
+    var n = tabelY.length;
+    if (!n) return 0;
+    if (y <= tabelY[0]) return 0;
+    if (y >= tabelY[n - 1]) return laengde;
+    var lo = 0, hi = n - 1;
+    while (hi - lo > 1) {
+      var mid = (lo + hi) >> 1;
+      if (tabelY[mid] < y) lo = mid; else hi = mid;
+    }
+    var dy = tabelY[hi] - tabelY[lo];
+    var f = dy > 0 ? (y - tabelY[lo]) / dy : 0;
+    return tabelL[lo] + f * (tabelL[hi] - tabelL[lo]);
   }
 
   var venter = false;
@@ -79,10 +105,9 @@
     if (!laengde) return;
     var b = bane.getBoundingClientRect();
     var maal = window.innerHeight * 0.6 - b.top;
-    var andel = Math.max(0, Math.min(1, maal / b.height));
-    if (reduceret) andel = 1;
-    grus.style.strokeDashoffset = laengde * (1 - andel);
-    var p = grus.getPointAtLength(laengde * andel);
+    var l = reduceret ? laengde : laengdeVedY(maal);
+    grus.style.strokeDashoffset = laengde - l;
+    var p = grus.getPointAtLength(l);
     gaaer.setAttribute("cx", p.x);
     gaaer.setAttribute("cy", p.y);
   }
