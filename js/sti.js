@@ -2,6 +2,8 @@
   "use strict";
   document.documentElement.classList.add("js");
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  // Genindlæst mens et kort var åbent: ryd den gamle kort-tilstand, ellers skal man trykke tilbage to gange
+  if (history.state && history.state.kort) history.replaceState(null, "");
 
   var data = window.STATIONER || [];
   var liste = document.getElementById("stationer");
@@ -187,6 +189,20 @@
   }
 
   // Forrige/Næste: indholdet glider ud til den ene side og det nye ind fra den anden
+  // Tryk mens en animation kører gemmes og udføres bagefter, så hurtige tryk ikke forsvinder
+  var koeRet = 0;
+  function trin(ret) {
+    if (travl) { if (erAaben() && !lukker) koeRet = Math.max(-5, Math.min(5, koeRet + ret)); return; }
+    skift(aktiv + ret);
+  }
+  function naesteIKoe() {
+    if (!koeRet || !erAaben() || lukker) { koeRet = 0; return; }
+    var r = koeRet > 0 ? 1 : -1;
+    koeRet -= r;
+    var maal = aktiv + r;
+    if (maal < 0 || maal >= data.length) { koeRet = 0; return; }
+    skift(maal);
+  }
   function skift(i) {
     if (i < 0 || i >= data.length || travl) return;
     if (reduceret) { udfyld(i); return; }
@@ -197,6 +213,7 @@
       return anim(el, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateX(" + (-ret * 44) + "px)" }], { duration: 220, delay: k * 30, easing: "cubic-bezier(.4,0,1,1)" });
     });
     Promise.all(ud.map(faerdig)).then(function () {
+      if (lukker || !erAaben()) return Promise.reject("lukket");
       udfyld(i);
       return klar(kImg);
     }).then(function () {
@@ -204,7 +221,7 @@
         anim(el, [{ opacity: 0, transform: "translateX(" + (ret * 56) + "px)" }, { opacity: 1, transform: "none" }], { duration: 520, delay: k * 60, easing: BLOED });
       });
       return vent(400);
-    }).then(function () { travl = false; });
+    }).then(function () { travl = false; naesteIKoe(); }, function () {});
   }
 
   function erAaben() { return kort.hasAttribute("open"); }
@@ -236,7 +253,7 @@
   kort.addEventListener("close", function () {
     document.body.style.overflow = "";
     nulstil();
-    lukker = false; travl = false;
+    lukker = false; travl = false; koeRet = 0;
     if (history.state && history.state.kort) history.back();
     var el = document.getElementById("station-" + data[aktiv].nr);
     if (el) { var knap = el.querySelector("button"); if (knap) knap.focus({ preventScroll: true }); }
@@ -250,17 +267,17 @@
     if (knap) aabn(+knap.dataset.i);
   });
   document.getElementById("kort-luk").addEventListener("click", luk);
-  forrige.addEventListener("click", function () { skift(aktiv - 1); });
-  naeste.addEventListener("click", function () { skift(aktiv + 1); });
+  forrige.addEventListener("click", function () { trin(-1); });
+  naeste.addEventListener("click", function () { trin(1); });
   kort.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowRight") skift(aktiv + 1);
-    if (e.key === "ArrowLeft") skift(aktiv - 1);
+    if (e.key === "ArrowRight") trin(1);
+    if (e.key === "ArrowLeft") trin(-1);
   });
 
   var sx = 0, sy = 0;
   kIndhold.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
   kIndhold.addEventListener("touchend", function (e) {
     var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
-    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) skift(aktiv + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) trin(dx < 0 ? 1 : -1);
   }, { passive: true });
 })();
