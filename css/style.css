@@ -219,13 +219,13 @@ a { color: var(--mos-2); }
 @keyframes aabn-skygge { from { opacity: 0; } to { opacity: 1; } }
 @keyframes aabn-tekst { from { opacity: 0; transform: translateY(26px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 .hero { background: var(--blaek); }
-.hero__img { animation: aabn-billede 2.4s cubic-bezier(.16,1,.3,1) both; }
-.hero__shade { animation: aabn-skygge 1.6s ease .4s both; }
-.hero__text > * { animation: aabn-tekst 1.1s cubic-bezier(.16,1,.3,1) both; }
-.hero__sted { animation-delay: .9s; }
-.hero__titel { animation-delay: 1.05s; }
-.hero__lead { animation-delay: 1.3s; }
-.hero__text .knap { animation-delay: 1.5s; }
+.hero__img { animation: aabn-billede 1.4s cubic-bezier(.16,1,.3,1) both; }
+.hero__shade { animation: aabn-skygge .9s ease .1s both; }
+.hero__text > * { animation: aabn-tekst .8s cubic-bezier(.16,1,.3,1) both; }
+.hero__sted { animation-delay: .25s; }
+.hero__titel { animation-delay: .35s; }
+.hero__lead { animation-delay: .5s; }
+.hero__text .knap { animation-delay: .65s; }
 @media (prefers-reduced-motion: reduce) {
   .hero__img, .hero__shade, .hero__text > * { animation: none; }
 }
