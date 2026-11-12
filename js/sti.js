@@ -64,33 +64,48 @@
     });
     pts.push([w / 2, h]);
     var d = "M" + pts[0][0] + " " + pts[0][1];
+    // Opslagstabel (længde, x, y) regnet direkte ud fra kurverne. getPointAtLength er
+    // langsom på en lang sti (flere sekunder på en telefon), så den bruges ikke her.
+    tabelL = [0]; tabelX = [pts[0][0]]; tabelY = [pts[0][1]];
+    var sum = 0, px = pts[0][0], py = pts[0][1];
     for (var i = 1; i < pts.length; i++) {
       var p0 = pts[i - 1], p1 = pts[i], my = (p0[1] + p1[1]) / 2;
       d += " C" + p0[0] + " " + my + " " + p1[0] + " " + my + " " + p1[0] + " " + p1[1];
+      var n = Math.max(8, Math.ceil((Math.abs(p1[0] - p0[0]) + (p1[1] - p0[1])) / 8));
+      for (var k = 1; k <= n; k++) {
+        var t = k / n, u = 1 - t;
+        var a = u * u * u, b = 3 * u * u * t, c = 3 * u * t * t, e = t * t * t;
+        var x = (a + b) * p0[0] + (c + e) * p1[0];
+        var y = a * p0[1] + (b + c) * my + e * p1[1];
+        sum += Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
+        tabelL.push(sum); tabelX.push(x); tabelY.push(y);
+        px = x; py = y;
+      }
     }
     grus.setAttribute("d", d);
     spor.setAttribute("d", d);
     laengde = grus.getTotalLength();
     grus.style.strokeDasharray = laengde;
-    // Opslagstabel: længde -> y, så prikken kan følge skærmhøjden og ikke stiens længde
-    tabelY = [];
-    tabelL = [];
-    var trin = Math.max(1, Math.ceil(laengde / 6));
-    for (var k = 0; k <= trin; k++) {
-      var l = laengde * k / trin;
-      tabelL.push(l);
-      tabelY.push(grus.getPointAtLength(l).y);
-    }
+    // Skalér så tabellen passer præcist til browserens egen længde (stregen tegnes ud fra den)
+    var skala = sum ? laengde / sum : 1;
+    for (var j = 0; j < tabelL.length; j++) tabelL[j] *= skala;
     opdater();
   }
-  var tabelY = [], tabelL = [];
+  var tabelY = [], tabelL = [], tabelX = [];
+  // Saml mange kald (opstart, load, ResizeObserver, skrifttyper) til én tegning pr. frame
+  var tegnVenter = false;
+  function planlaegSti() {
+    if (tegnVenter) return;
+    tegnVenter = true;
+    requestAnimationFrame(function () { tegnVenter = false; tegnSti(); });
+  }
 
   // Find stedet på stien hvor y = maal (stien går altid nedad, så y er stigende)
-  function laengdeVedY(y) {
+  function punktVedY(y) {
     var n = tabelY.length;
-    if (!n) return 0;
-    if (y <= tabelY[0]) return 0;
-    if (y >= tabelY[n - 1]) return laengde;
+    if (!n) return { l: 0, x: 0, y: 0 };
+    if (y <= tabelY[0]) return { l: 0, x: tabelX[0], y: tabelY[0] };
+    if (y >= tabelY[n - 1]) return { l: laengde, x: tabelX[n - 1], y: tabelY[n - 1] };
     var lo = 0, hi = n - 1;
     while (hi - lo > 1) {
       var mid = (lo + hi) >> 1;
@@ -98,7 +113,11 @@
     }
     var dy = tabelY[hi] - tabelY[lo];
     var f = dy > 0 ? (y - tabelY[lo]) / dy : 0;
-    return tabelL[lo] + f * (tabelL[hi] - tabelL[lo]);
+    return {
+      l: tabelL[lo] + f * (tabelL[hi] - tabelL[lo]),
+      x: tabelX[lo] + f * (tabelX[hi] - tabelX[lo]),
+      y: y
+    };
   }
 
   var venter = false;
@@ -107,18 +126,17 @@
     if (!laengde) return;
     var b = bane.getBoundingClientRect();
     var maal = window.innerHeight * 0.6 - b.top;
-    var l = reduceret ? laengde : laengdeVedY(maal);
-    grus.style.strokeDashoffset = laengde - l;
-    var p = grus.getPointAtLength(l);
+    var p = punktVedY(reduceret ? Infinity : maal);
+    grus.style.strokeDashoffset = laengde - p.l;
     gaaer.setAttribute("cx", p.x);
     gaaer.setAttribute("cy", p.y);
   }
   window.addEventListener("scroll", function () { if (!venter) { venter = true; requestAnimationFrame(opdater); } }, { passive: true });
   var sidstBredde = innerWidth;
-  window.addEventListener("resize", function () { if (innerWidth !== sidstBredde) { sidstBredde = innerWidth; tegnSti(); } });
-  window.addEventListener("load", tegnSti);
-  if ("ResizeObserver" in window) new ResizeObserver(tegnSti).observe(liste);
-  tegnSti();
+  window.addEventListener("resize", function () { if (innerWidth !== sidstBredde) { sidstBredde = innerWidth; planlaegSti(); } });
+  window.addEventListener("load", planlaegSti);
+  if ("ResizeObserver" in window) new ResizeObserver(planlaegSti).observe(liste);
+  planlaegSti();
 
   // ---------- Stationskort ----------
   var kort = document.getElementById("kort");
